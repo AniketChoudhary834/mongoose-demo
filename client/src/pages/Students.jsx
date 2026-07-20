@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-toastify';
 import { getDepartments } from '../utils/departmentApi';
+import { backendUrl } from '../utils/url';
 
 
 const initialStudent = {
@@ -45,7 +46,7 @@ const Students = () => {
     const loadStudents = async()=>{
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:3000/api/students?search=${search}&page=${page}&limit=${limit}&sort=${sortBy}`);
+            const res = await fetch(`${backendUrl}/api/students?search=${search}&page=${page}&limit=${limit}&sort=${sortBy}`);
             const data = await res.json();
             console.log(data);
             if(data.success){
@@ -90,7 +91,7 @@ const Students = () => {
         e.preventDefault();
         console.log(formData);
         try {
-            const res = await fetch("http://localhost:3000/api/students/",{
+            const res = await fetch(`${backendUrl}/api/students/`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
